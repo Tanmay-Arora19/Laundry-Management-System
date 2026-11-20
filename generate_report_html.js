@@ -57,7 +57,7 @@ const htmlContent = `<!DOCTYPE html>
             background: #FFFFFF;
             max-width: 900px;
             margin: 0 auto 30px auto;
-            padding: 70px 80px;
+            padding: 65px 75px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             border-radius: 4px;
             min-height: 1100px;
@@ -73,7 +73,7 @@ const htmlContent = `<!DOCTYPE html>
             .report-page {
                 box-shadow: none;
                 margin: 0;
-                padding: 50px 60px;
+                padding: 45px 55px;
                 max-width: 100%;
                 border-radius: 0;
                 page-break-after: always;
@@ -121,7 +121,7 @@ const htmlContent = `<!DOCTYPE html>
         }
 
         h1 {
-            font-size: 26px;
+            font-size: 25px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             text-align: center;
@@ -129,43 +129,43 @@ const htmlContent = `<!DOCTYPE html>
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 19px;
             border-bottom: 2px solid var(--primary);
             padding-bottom: 6px;
-            margin-top: 28px;
-            margin-bottom: 16px;
+            margin-top: 26px;
+            margin-bottom: 14px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
 
         h3 {
-            font-size: 16px;
-            margin-top: 20px;
+            font-size: 15.5px;
+            margin-top: 18px;
             color: var(--secondary);
         }
 
         p {
-            font-size: 14.5px;
-            margin-bottom: 14px;
+            font-size: 14px;
+            margin-bottom: 12px;
             text-align: justify;
         }
 
         ul, ol {
-            margin-left: 28px;
-            margin-bottom: 16px;
-            font-size: 14px;
+            margin-left: 26px;
+            margin-bottom: 14px;
+            font-size: 13.5px;
         }
 
         li {
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         /* Cover Page Styling */
         .cover-header {
             text-align: center;
             border-bottom: 3px double var(--chitkara-red);
-            padding-bottom: 24px;
-            margin-bottom: 36px;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .cover-header h2 {
@@ -178,7 +178,7 @@ const htmlContent = `<!DOCTYPE html>
 
         .cover-header p {
             text-align: center;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 600;
             color: var(--primary);
             margin: 4px 0 0 0;
@@ -186,50 +186,50 @@ const htmlContent = `<!DOCTYPE html>
 
         .cover-title-area {
             text-align: center;
-            margin: 40px 0;
+            margin: 30px 0;
         }
 
         .cover-title-area h1 {
-            font-size: 28px;
+            font-size: 26px;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .cover-title-area .sub {
-            font-size: 16px;
+            font-size: 15px;
             font-style: italic;
             color: #4A5568;
             max-width: 650px;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 16px auto;
         }
 
         .cover-title-area .degree-line {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: bold;
             color: var(--chitkara-red);
         }
 
         .cover-meta-grid {
-            margin-top: 50px;
+            margin-top: 40px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 24px;
             border-top: 1px solid var(--border);
-            padding-top: 24px;
+            padding-top: 20px;
         }
 
         /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 13.5px;
+            margin: 16px 0;
+            font-size: 13px;
             background: #FFFFFF;
         }
 
         th, td {
             border: 1px solid #A0AEC0;
-            padding: 9px 12px;
+            padding: 8px 10px;
             text-align: left;
         }
 
@@ -240,12 +240,12 @@ const htmlContent = `<!DOCTYPE html>
         }
 
         tr:nth-child(even) {
-            background-color: #F7FAFC;
+            background-color: #F8FAFC;
         }
 
         /* Figures */
         .figure-container {
-            margin: 24px 0;
+            margin: 20px 0;
             text-align: center;
         }
 
@@ -257,10 +257,10 @@ const htmlContent = `<!DOCTYPE html>
         }
 
         .figure-caption {
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: bold;
             color: #4A5568;
-            margin-top: 8px;
+            margin-top: 6px;
             font-style: italic;
         }
 
@@ -268,27 +268,27 @@ const htmlContent = `<!DOCTYPE html>
         pre {
             background: #1A202C;
             color: #E2E8F0;
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-radius: 6px;
             font-family: "Consolas", "Courier New", monospace;
-            font-size: 12.5px;
+            font-size: 12px;
             overflow-x: auto;
-            margin: 16px 0;
-            line-height: 1.45;
+            margin: 14px 0;
+            line-height: 1.4;
         }
 
         code {
             font-family: "Consolas", "Courier New", monospace;
             background: #EDF2F7;
             color: #800000;
-            padding: 2px 5px;
+            padding: 2px 4px;
             border-radius: 3px;
-            font-size: 13px;
+            font-size: 12.5px;
         }
 
         /* Signatures Area */
         .sig-container {
-            margin-top: 70px;
+            margin-top: 60px;
             display: flex;
             justify-content: space-between;
         }
@@ -297,8 +297,8 @@ const htmlContent = `<!DOCTYPE html>
             text-align: center;
             width: 45%;
             border-top: 1px solid #4A5568;
-            padding-top: 8px;
-            font-size: 13.5px;
+            padding-top: 6px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -325,14 +325,15 @@ const htmlContent = `<!DOCTYPE html>
             <p class="degree-line">Submitted in partial fulfilment of the requirements for the course project during Semester III</p>
         </div>
 
-        <div style="margin: 40px 0;">
-            <p style="font-weight: bold; text-align: center; margin-bottom: 8px;">SUBMITTED BY (GROUP MEMBERS):</p>
+        <div style="margin: 30px 0;">
+            <p style="font-weight: bold; text-align: center; margin-bottom: 8px; font-size: 14px;">SUBMITTED BY (GROUP MEMBERS):</p>
             <table>
                 <thead>
                     <tr>
-                        <th style="text-align: center; width: 80px;">S. No.</th>
-                        <th>Name of Student</th>
-                        <th style="text-align: center; width: 180px;">Roll Number</th>
+                        <th style="text-align: center; width: 60px;">S. No.</th>
+                        <th style="width: 170px;">Name of Student</th>
+                        <th style="text-align: center; width: 120px;">Roll Number</th>
+                        <th>Key Contribution Area</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -340,21 +341,25 @@ const htmlContent = `<!DOCTYPE html>
                         <td style="text-align: center;">1</td>
                         <td><strong>Tanmay Arora</strong></td>
                         <td style="text-align: center;"><strong>2510993577</strong></td>
+                        <td>Customer &amp; Service Management (Customer details, garment details, and service selection)</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">2</td>
                         <td><strong>Ansh Arora</strong></td>
                         <td style="text-align: center;"><strong>2510992560</strong></td>
+                        <td>Order Management &amp; Pricing (Creating orders, generating IDs, and calculating bills)</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">3</td>
                         <td><strong>Jaskaran Singh Bhinder</strong></td>
                         <td style="text-align: center;"><strong>2510993488</strong></td>
+                        <td>Order Tracking &amp; Payment (Updating order status, searching orders, and payment management)</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">4</td>
                         <td><strong>Vishal</strong></td>
                         <td style="text-align: center;"><strong>2510992990</strong></td>
+                        <td>Data Management &amp; Main System (File handling, backup, business summary, and main menu integration)</td>
                     </tr>
                 </tbody>
             </table>
@@ -363,13 +368,13 @@ const htmlContent = `<!DOCTYPE html>
         <div class="cover-meta-grid">
             <div>
                 <p style="margin: 0; font-size: 13px; color: #4A5568;">Under the guidance of:</p>
-                <p style="margin: 2px 0 0 0; font-size: 16px; font-weight: bold; color: var(--primary);">Amitabh Srivastava</p>
-                <p style="margin: 0; font-size: 13px; color: #4A5568;">Department of CSE (AI &amp; ML)</p>
+                <p style="margin: 2px 0 0 0; font-size: 15px; font-weight: bold; color: var(--primary);">Amitabh Srivastava</p>
+                <p style="margin: 0; font-size: 12.5px; color: #4A5568;">Department of CSE (AI &amp; ML)</p>
             </div>
             <div style="text-align: right;">
-                <p style="margin: 0; font-size: 13px; color: #4A5568;">Academic Year: <strong>2026</strong></p>
-                <p style="margin: 2px 0 0 0; font-size: 13px; color: #4A5568;">Semester: <strong>III</strong></p>
-                <p style="margin: 0; font-size: 13px; color: #4A5568;">Chitkara University, Punjab</p>
+                <p style="margin: 0; font-size: 12.5px; color: #4A5568;">Academic Year: <strong>2026</strong></p>
+                <p style="margin: 2px 0 0 0; font-size: 12.5px; color: #4A5568;">Semester: <strong>III</strong></p>
+                <p style="margin: 0; font-size: 12.5px; color: #4A5568;">Chitkara University, Punjab</p>
             </div>
         </div>
     </div>
@@ -384,9 +389,10 @@ const htmlContent = `<!DOCTYPE html>
         <table>
             <thead>
                 <tr>
-                    <th style="text-align: center; width: 80px;">S. No.</th>
-                    <th>Name of Student</th>
-                    <th style="text-align: center; width: 180px;">Roll Number</th>
+                    <th style="text-align: center; width: 60px;">S. No.</th>
+                    <th style="width: 170px;">Name of Student</th>
+                    <th style="text-align: center; width: 120px;">Roll Number</th>
+                    <th>Key Contribution Area</th>
                 </tr>
             </thead>
             <tbody>
@@ -394,26 +400,30 @@ const htmlContent = `<!DOCTYPE html>
                     <td style="text-align: center;">1</td>
                     <td>Tanmay Arora</td>
                     <td style="text-align: center;">2510993577</td>
+                    <td>Customer &amp; Service Management: Customer details, garment details and service selection</td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">2</td>
                     <td>Ansh Arora</td>
                     <td style="text-align: center;">2510992560</td>
+                    <td>Order Management &amp; Pricing: Creating orders, generating IDs and calculating bills</td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">3</td>
                     <td>Jaskaran Singh Bhinder</td>
                     <td style="text-align: center;">2510993488</td>
+                    <td>Order Tracking &amp; Payment: Updating order status, searching orders and payment management</td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">4</td>
                     <td>Vishal</td>
                     <td style="text-align: center;">2510992990</td>
+                    <td>Data Management &amp; Main System: File handling, backup, business summary and main menu integration</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="sig-container" style="margin-top: 100px;">
+        <div class="sig-container" style="margin-top: 80px;">
             <div class="sig-box">
                 <strong>Team Representative Signature</strong><br>
                 <span>(On behalf of all group members)</span>
@@ -424,7 +434,7 @@ const htmlContent = `<!DOCTYPE html>
             </div>
         </div>
 
-        <div class="sig-container" style="margin-top: 60px; justify-content: center;">
+        <div class="sig-container" style="margin-top: 50px; justify-content: center;">
             <div class="sig-box" style="width: 60%;">
                 <strong>Head of Department</strong><br>
                 <span>Department of Computer Science &amp; Engineering (AI &amp; ML)<br>Chitkara University, Punjab</span>
@@ -439,45 +449,47 @@ const htmlContent = `<!DOCTYPE html>
 
         <p>We are also thankful to the <strong>Department of Computer Science &amp; Engineering (AI &amp; ML), Chitkara University</strong>, for providing the computational resources, laboratory environment, and structured coursework that made it possible to translate classroom object-oriented concepts into a working industrial software prototype.</p>
 
-        <p>This project was a genuinely collaborative effort among <strong>Tanmay Arora</strong>, <strong>Ansh Arora</strong>, <strong>Jaskaran Singh Bhinder</strong>, and <strong>Vishal</strong>. Each member contributed across research, design, coding, testing, and documentation. Regular team discussions helped us maintain a coherent codebase, cleanly separate domain concerns across four distinct modules, and eliminate interface friction. We are grateful for each other's commitment, patience, and mutual dedication throughout this academic journey.</p>
-
-        <h2>Group Contribution Details</h2>
-        <table>
+        <!-- EXACT FEE PROJECT TABLE STRUCTURE: S.No. | Team Member | Key Contribution Area -->
+        <table style="margin: 20px 0;">
             <thead>
                 <tr>
-                    <th style="width: 60px; text-align: center;">S. No.</th>
-                    <th style="width: 170px;">Team Member</th>
-                    <th style="width: 190px;">Module Assigned</th>
-                    <th>Key Responsibilities &amp; Contribution Areas</th>
+                    <th style="width: 60px; text-align: center;">S.No.</th>
+                    <th style="width: 200px;">Team Member</th>
+                    <th>Key Contribution Area</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td style="text-align: center;">1</td>
-                    <td><strong>Tanmay Arora</strong><br><small>Roll: 2510993577</small></td>
-                    <td><strong>Module 1: Customer &amp; Service Management</strong></td>
-                    <td>Designed the encapsulated <code>Customer</code> model, developed the abstract <code>LaundryService</code> inheritance tree (<code>WashingService</code>, <code>DryCleaningService</code>, <code>IroningService</code>), defined per-garment rate calculations, and implemented robust input validation handlers.</td>
+                    <td><strong>Tanmay Arora</strong></td>
+                    <td>Customer &amp; Service Management (Customer details, garment details, and service selection)</td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">2</td>
-                    <td><strong>Ansh Arora</strong><br><small>Roll: 2510992560</small></td>
-                    <td><strong>Module 2: Order Management &amp; Pricing</strong></td>
-                    <td>Engineered the central <code>Order</code> entity, designed the sequential 4-digit unique Order ID generation algorithm (starting at 1001), developed the automated price calculation logic (Quantity × Rate), and integrated pickup vs. home delivery logistics.</td>
+                    <td><strong>Ansh Arora</strong></td>
+                    <td>Order Management &amp; Pricing (Creating orders, generating IDs, and calculating bills)</td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">3</td>
-                    <td><strong>Jaskaran Singh Bhinder</strong><br><small>Roll: 2510993488</small></td>
-                    <td><strong>Module 3: Order Tracking &amp; Payment</strong></td>
-                    <td>Architected the <code>Trackable</code> interface for real-time status transitions (<code>Received</code> ➔ <code>Washing</code> ➔ <code>Ready</code> ➔ <code>Delivered</code>), implemented fast O(1) order lookup using <code>HashMap</code>, and developed the payment settlement module.</td>
+                    <td><strong>Jaskaran Singh Bhinder</strong></td>
+                    <td>Order Tracking &amp; Payment (Updating order status, searching orders, and payment management)</td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">4</td>
-                    <td><strong>Vishal</strong><br><small>Roll: 2510992990</small></td>
-                    <td><strong>Module 4: Data Management &amp; Main System</strong></td>
-                    <td>Implemented permanent file persistence (<code>orders.txt</code> via <code>BufferedReader</code>/<code>PrintWriter</code>), built the automated byte-stream dual backup mechanism (<code>orders_backup.txt</code>), created the Java Streams business analytics engine, and centralized the main menu execution loop.</td>
+                    <td><strong>Vishal</strong></td>
+                    <td>Data Management &amp; Main System (File handling, backup, business summary, and main menu integration)</td>
                 </tr>
             </tbody>
         </table>
+
+        <p>This project was a genuinely collaborative effort among <strong>Tanmay Arora</strong>, <strong>Ansh Arora</strong>, <strong>Jaskaran Singh Bhinder</strong>, and <strong>Vishal</strong>. Each member contributed across research, design, development, testing, and documentation: Tanmay Arora led Customer &amp; Service Management (customer details, garment details, and service selection); Ansh Arora spearheaded Order Management &amp; Pricing (creating orders, generating IDs, and calculating bills); Jaskaran Singh Bhinder engineered Order Tracking &amp; Payment (updating order status, searching orders, and payment management); and Vishal developed Data Management &amp; Main System (file handling, backup, business summary, and main menu integration). Regular team discussions helped us stay consistent in design and modular execution without losing a single shared visual identity. We are grateful for each other's commitment, patience, and mutual dedication throughout this academic journey.</p>
+
+        <p>Finally, we want to acknowledge the global Java developer community and the official Oracle documentation whose tutorials and technical references provided continuous inspiration for standard library streams, generics, and concurrent multithreading.</p>
+
+        <div style="text-align: right; margin-top: 24px;">
+            <p style="margin: 0; font-weight: bold;">On behalf of the project team</p>
+            <p style="margin: 0; font-size: 13px; color: #4A5568;">B.Tech CSE (AI &amp; ML), Semester III, Chitkara University</p>
+        </div>
     </div>
 
     <!-- PAGE 4: ABSTRACT & TABLE OF CONTENTS -->
@@ -491,7 +503,7 @@ const htmlContent = `<!DOCTYPE html>
 
         <p><strong>Keywords:</strong> <em>Core Java, Object-Oriented Programming (OOP), Laundry Management, File Handling, Multithreading, Java Collections, Java Streams, Software Engineering.</em></p>
 
-        <h2 style="margin-top: 36px;">Table of Contents</h2>
+        <h2 style="margin-top: 30px;">Table of Contents</h2>
         <table>
             <thead>
                 <tr>
@@ -536,7 +548,7 @@ const htmlContent = `<!DOCTYPE html>
         <ul>
             <li><strong>Digital Customer Management:</strong> Store customer identity in encapsulated data structures.</li>
             <li><strong>Automated Sequential ID Generation:</strong> Issue unique sequential 4-digit identifiers starting from 1001.</li>
-            <li><strong>Dynamic Pricing Engine:</strong> Compute totals automatically using OOP polymorphism based on service rates ($Quantity × Rate$).</li>
+            <li><strong>Dynamic Pricing Engine:</strong> Compute totals automatically using OOP polymorphism based on service rates (Quantity × Rate).</li>
             <li><strong>Lifecycle Tracking:</strong> Monitor order progress across four standard stages (<code>Received</code>, <code>Washing</code>, <code>Ready</code>, <code>Delivered</code>).</li>
             <li><strong>Payment Settlement:</strong> Maintain transparent accounting records toggling orders between <code>Pending</code> and <code>Paid</code>.</li>
             <li><strong>Permanent File Persistence:</strong> Serialize records into flat text files (<code>orders.txt</code>) using character streams.</li>
@@ -789,4 +801,4 @@ notificationThread.start();</pre>
 `;
 
 fs.writeFileSync(path.join(__dirname, 'Laundry_Project_Report.html'), htmlContent, 'utf8');
-console.log('Successfully generated Laundry_Project_Report.html');
+console.log('Successfully updated Laundry_Project_Report.html with exact FEE project table structure.');
