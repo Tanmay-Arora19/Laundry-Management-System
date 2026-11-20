@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="850" height="480">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0B2545;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#134074;stop-opacity:1" />
+    </linearGradient>
+    <filter id="boxShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="480" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="425" y="35" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="18" font-weight="bold" fill="#0B2545" text-anchor="middle">System Architecture &amp; Data Flow Diagram</text>
+  <text x="425" y="56" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="12" fill="#64748B" text-anchor="middle">Laundrymat / Dry Cleaning Order Tracking System Using Java</text>
+
+  <!-- Block 1: User / Shopkeeper -->
+  <rect x="50" y="90" width="200" height="70" rx="8" fill="url(#grad1)" filter="url(#boxShadow)"/>
+  <text x="150" y="122" font-family="Arial" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">User / Shopkeeper</text>
+  <text x="150" y="142" font-family="Arial" font-size="11" fill="#93C5FD" text-anchor="middle">Console Terminal Input</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 250 125 L 320 125" stroke="#0077B6" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <text x="285" y="115" font-family="Arial" font-size="10" fill="#0077B6" text-anchor="middle">Commands</text>
+
+  <!-- Block 2: Main Menu & Controller -->
+  <rect x="325" y="90" width="200" height="70" rx="8" fill="#134074" filter="url(#boxShadow)"/>
+  <text x="425" y="122" font-family="Arial" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Main Menu Controller</text>
+  <text x="425" y="142" font-family="Arial" font-size="11" fill="#93C5FD" text-anchor="middle">Options 1-8 &amp; Input Validation</text>
+
+  <!-- Arrow 2 -->
+  <path d="M 525 125 L 595 125" stroke="#0077B6" stroke-width="3" fill="none"/>
+  <text x="560" y="115" font-family="Arial" font-size="10" fill="#0077B6" text-anchor="middle">Dispatches</text>
+
+  <!-- Block 3: Business Logic & OOP Modules -->
+  <rect x="600" y="90" width="200" height="70" rx="8" fill="#0B2545" filter="url(#boxShadow)"/>
+  <text x="700" y="122" font-family="Arial" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Core Business Logic</text>
+  <text x="700" y="142" font-family="Arial" font-size="11" fill="#93C5FD" text-anchor="middle">Order, Customer, Services</text>
+
+  <!-- Downward Arrow from Block 3 to Memory & Processing Layer -->
+  <path d="M 700 160 L 700 220" stroke="#0077B6" stroke-width="3" fill="none"/>
+
+  <!-- Sub-block: 4 OOP Modules -->
+  <rect x="50" y="225" width="750" height="110" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#boxShadow)"/>
+  <text x="425" y="248" font-family="Arial" font-size="13" font-weight="bold" fill="#0B2545" text-anchor="middle">Object-Oriented Subsystems &amp; Services Hierarchy</text>
+
+  <!-- Box M1 -->
+  <rect x="70" y="260" width="160" height="60" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+  <text x="150" y="285" font-family="Arial" font-size="11" font-weight="bold" fill="#0F172A" text-anchor="middle">Customer Module</text>
+  <text x="150" y="303" font-family="Arial" font-size="9" fill="#64748B" text-anchor="middle">Encapsulated Data</text>
+
+  <!-- Box M2 -->
+  <rect x="250" y="260" width="160" height="60" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+  <text x="330" y="285" font-family="Arial" font-size="11" font-weight="bold" fill="#0F172A" text-anchor="middle">Pricing &amp; Services</text>
+  <text x="330" y="303" font-family="Arial" font-size="9" fill="#64748B" text-anchor="middle">Polymorphic Rates</text>
+
+  <!-- Box M3 -->
+  <rect x="430" y="260" width="160" height="60" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+  <text x="510" y="285" font-family="Arial" font-size="11" font-weight="bold" fill="#0F172A" text-anchor="middle">Tracking &amp; Pay</text>
+  <text x="510" y="303" font-family="Arial" font-size="9" fill="#64748B" text-anchor="middle">Trackable Interface</text>
+
+  <!-- Box M4 -->
+  <rect x="610" y="260" width="160" height="60" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+  <text x="690" y="285" font-family="Arial" font-size="11" font-weight="bold" fill="#0F172A" text-anchor="middle">Java Streams API</text>
+  <text x="690" y="303" font-family="Arial" font-size="9" fill="#64748B" text-anchor="middle">Analytics &amp; Top Order</text>
+
+  <!-- Downward Arrow from OOP to Persistence -->
+  <path d="M 425 335 L 425 375" stroke="#0077B6" stroke-width="3" fill="none"/>
+
+  <!-- Persistence Layer Blocks -->
+  <rect x="50" y="380" width="230" height="75" rx="8" fill="#15803D" filter="url(#boxShadow)"/>
+  <text x="165" y="412" font-family="Arial" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">In-Memory Collections</text>
+  <text x="165" y="432" font-family="Arial" font-size="10" fill="#BBF7D0" text-anchor="middle">ArrayList (Order List) | HashMap (ID Search)</text>
+
+  <rect x="310" y="380" width="230" height="75" rx="8" fill="#0369A1" filter="url(#boxShadow)"/>
+  <text x="425" y="412" font-family="Arial" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Primary File Storage</text>
+  <text x="425" y="432" font-family="Arial" font-size="10" fill="#BAE6FD" text-anchor="middle">orders.txt (Character Streams)</text>
+
+  <rect x="570" y="380" width="230" height="75" rx="8" fill="#B45309" filter="url(#boxShadow)"/>
+  <text x="685" y="412" font-family="Arial" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Automated Backup</text>
+  <text x="685" y="432" font-family="Arial" font-size="10" fill="#FEF3C7" text-anchor="middle">orders_backup.txt (Byte Streams)</text>
+</svg>
