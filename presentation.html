@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laundrymat / Dry Cleaning Order Tracking System Using Java - Presentation</title>
+    <style>
+        :root {
+            --navy: #0B2545;
+            --royal: #134074;
+            --accent: #0077B6;
+            --light-blue: #8DA9C4;
+            --ice-blue: #EEF4F8;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-body: #334155;
+            --text-muted: #64748B;
+            --border: #CBD5E1;
+            --green: #15803D;
+            --orange: #C2410C;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0F172A;
+            color: var(--text-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar Controls */
+        .controls-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: rgba(11, 37, 69, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 1000;
+            color: #FFFFFF;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .controls-left {
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-tag {
+            background: var(--royal);
+            color: #93C5FD;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            border: 1px solid #3B82F6;
+        }
+
+        .controls-center {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-btn {
+            background: #1E293B;
+            border: 1px solid #334155;
+            color: #FFFFFF;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--royal);
+            border-color: #60A5FA;
+        }
+
+        .slide-counter {
+            font-size: 14px;
+            font-weight: 600;
+            color: #93C5FD;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .controls-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: 1px solid #64748B;
+            color: #CBD5E1;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-btn:hover, .toggle-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #FFFFFF;
+        }
+
+        /* Slide Viewport */
+        .presentation-container {
+            width: 100%;
+            max-width: 1150px;
+            padding: 70px 20px 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--ice-blue);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Slide Header */
+        .slide-header {
+            background: var(--navy);
+            color: #FFFFFF;
+            padding: 18px 30px;
+            border-bottom: 4px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 4px;
+        }
+
+        .slide-header p {
+            font-size: 12px;
+            color: #93C5FD;
+        }
+
+        .slide-num-box {
+            background: var(--royal);
+            color: #FFFFFF;
+            border: 1px solid #60A5FA;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Slide Content Area */
+        .slide-body {
+            flex: 1;
+            padding: 24px 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .slide-body p.intro-lead {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Slide Footer */
+        .slide-footer {
+            height: 34px;
+            background: #E2E8F0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .slide-footer span.right-tag {
+            color: var(--royal);
+            font-weight: 600;
+        }
+
+        /* Grids & Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex: 1;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            flex: 1;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--royal);
+        }
+
+        .card.orange-border {
+            border-left-color: var(--orange);
+        }
+
+        .card.green-border {
+            border-left-color: var(--green);
+        }
+
+        .card.accent-border {
+            border-left-color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card p {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--text-body);
+        }
+
+        .card ul {
+            padding-left: 18px;
+            font-size: 11.5px;
+            line-height: 1.5;
+            color: var(--text-body);
+        }
+
+        .card ul li {
+            margin-bottom: 4px;
+        }
+
+        /* Table Styling */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+            background: #FFFFFF;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .custom-table th {
+            background: var(--navy);
+            color: #FFFFFF;
+            text-align: left;
+            padding: 8px 12px;
+            font-weight: 600;
+        }
+
+        .custom-table td {
+            padding: 7px 12px;
+            border-bottom: 1px solid #E2E8F0;
+            color: var(--text-body);
+            line-height: 1.4;
+        }
+
+        .custom-table tr:nth-child(even) {
+            background: #F8FAFC;
+        }
+
+        .custom-table td.concept-name {
+            font-weight: 700;
+            color: var(--royal);
+            white-space: nowrap;
+        }
+
+        /* Terminal Window */
+        .terminal-box {
+            background: #090D16;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            color: #38BDF8;
+            font-family: "Courier New", Courier, monospace;
+            padding: 14px 18px;
+            font-size: 11px;
+            line-height: 1.4;
+            height: 100%;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Presenter Notes Box */
+        .notes-drawer {
+            width: 100%;
+            max-width: 1150px;
+            margin-top: 16px;
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px 20px;
+            color: #E2E8F0;
+            display: none;
+        }
+
+        .notes-drawer.open {
+            display: block;
+        }
+
+        .notes-drawer h4 {
+            color: #38BDF8;
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-drawer p {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #CBD5E1;
+        }
+
+        /* Title Slide Layout */
+        .slide-title-bg {
+            background: linear-gradient(135deg, #0B2545 0%, #134074 100%);
+            color: #FFFFFF;
+            padding: 40px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #60A5FA;
+            color: #BAE6FD;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .title-heading {
+            font-size: 34px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            line-height: 1.25;
+            letter-spacing: 0.5px;
+        }
+
+        .title-sub {
+            font-size: 16px;
+            color: #93C5FD;
+            max-width: 850px;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .title-team-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            text-align: left;
+        }
+
+        .team-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 16px 20px;
+        }
+
+        .team-box h4 {
+            color: #38BDF8;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .team-box p {
+            color: #F8FAFC;
+            font-size: 12.5px;
+            line-height: 1.6;
+        }
+
+        /* Flow diagram boxes */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .flow-node {
+            background: var(--navy);
+            color: #FFFFFF;
+            border: 1px solid #38BDF8;
+            padding: 10px 12px;
+            border-radius: 6px;
+            text-align: center;
+            flex: 1;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .flow-node span {
+            display: block;
+            font-size: 9px;
+            color: #93C5FD;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+
+        .flow-arrow {
+            font-size: 16px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #1E293B;
+            z-index: 1000;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 5%;
+            transition: width 0.3s ease;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: #FFFFFF;
+            }
+            .controls-bar, .notes-drawer, .progress-bar-container {
+                display: none !important;
+            }
+            .presentation-container {
+                padding: 0;
+                max-width: 100%;
+            }
+            .slide {
+                display: flex !important;
+                page-break-after: always;
+                margin-bottom: 20px;
+                box-shadow: none;
+                border: 1px solid #CBD5E1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+        <div class="controls-left">
+            <span>Laundrymat Order System</span>
+            <span class="badge-tag">Chitkara University</span>
+        </div>
+        <div class="controls-center">
+            <button class="nav-btn" onclick="prevSlide()">◀ Previous</button>
+            <span class="slide-counter" id="slideIndicator">Slide 1 / 20</span>
+            <button class="nav-btn" onclick="nextSlide()">Next ▶</button>
+        </div>
+        <div class="controls-right">
+            <button class="toggle-btn" id="notesToggle" onclick="toggleNotes()">🎙️ Presenter Script</button>
+            <button class="toggle-btn" onclick="toggleFullScreen()">⛶ Fullscreen</button>
+        </div>
+    </div>
+
+    <!-- Presentation Area -->
+    <div class="presentation-container">
+
+        <!-- SLIDE 1: Title Slide -->
+        <div class="slide slide-title-bg active" id="slide-1">
+            <div class="title-badge">B.TECH CSE (AI & ML) — 3RD SEMESTER ACADEMIC PROJECT</div>
+            <h1 class="title-heading">LAUNDRYMAT / DRY CLEANING<br>ORDER TRACKING SYSTEM</h1>
+            <p class="title-sub">A Console-Based Core Java Application Demonstrating Object-Oriented Programming, Multithreading, and File Persistence</p>
+            
+            <div class="title-team-grid">
+                <div class="team-box">
+                    <h4>Project Team Members</h4>
+                    <p>1. Tanmay Arora (Lead Developer)<br>2. [Team Member 2 Name]<br>3. [Team Member 3 Name]<br>4. [Team Member 4 Name]</p>
+                </div>
+                <div class="team-box">
+                    <h4>Department & Mentor</h4>
+                    <p>Department of CSE (AI & ML)<br>Chitkara University, Punjab<br><strong>Faculty Guide:</strong> [Faculty Mentor Name]</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Introduction -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <div>
+                    <h2>Introduction to Laundry Management System</h2>
+                    <p>Understanding the Daily Workflow of Laundry and Dry Cleaning Businesses</p>
+                </div>
+                <div class="slide-num-box">02</div>
+            </div>
+            <div class="slide-body">
+                <div class="card accent-border">
+                    <h3>What is a Laundry Management System?</h3>
+                    <p>A Laundry Management System is a software application designed to handle the daily operations of a laundry or dry cleaning shop. In our daily lives, people give clothes to laundry shops for washing, dry cleaning, and ironing. The shopkeeper needs to record customer names, count garments, track cleaning stages, calculate bills, and ensure clothes are safely returned. Our Java application automates all these manual tasks through a simple, interactive terminal system that makes laundry management fast, organized, and error-free.</p>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>How Traditional Laundry Shops Work Daily</h3>
+                        <ul>
+                            <li><strong>Receiving Garments:</strong> Customers bring dirty clothes or schedule a pickup for cleaning.</li>
+                            <li><strong>Recording Information:</strong> Shopkeepers write customer names, phone numbers, and clothes count in paper registers.</li>
+                            <li><strong>Performing Services:</strong> Clothes are separated for washing, dry cleaning, or ironing.</li>
+                            <li><strong>Billing & Handover:</strong> Bills are calculated by hand, payments are collected, and clothes are returned.</li>
+                        </ul>
+                    </div>
+                    <div class="card green-border">
+                        <h3>How Our Java Application Helps</h3>
+                        <ul>
+                            <li><strong>Instant Order Registration:</strong> Replaces paper notebooks with structured computer input.</li>
+                            <li><strong>Automatic Bill Calculation:</strong> Multiplies garment quantity by service rates with zero math mistakes.</li>
+                            <li><strong>Live Status Tracking:</strong> Lets shopkeepers update clothes stages with a single keypress.</li>
+                            <li><strong>Safe Record Storage:</strong> Saves every transaction in a permanent file for future reference.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Problem Statement -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <div>
+                    <h2>Problem Statement – Challenges with Manual Management</h2>
+                    <p>Why Traditional Pen-and-Paper Laundry Record Keeping Fails</p>
+                </div>
+                <div class="slide-num-box">03</div>
+            </div>
+            <div class="slide-body">
+                <p class="intro-lead">In many traditional laundry shops, shopkeepers still write customer orders in paper notebooks and give handwritten paper receipts. This manual approach creates several serious everyday problems:</p>
+                <div class="grid-2">
+                    <div class="card orange-border">
+                        <h3>1. Damaged or Lost Paper Records</h3>
+                        <p>Paper notebooks can easily get wet, torn, or misplaced in a busy laundry shop environment. When a register is lost, the shopkeeper loses all past customer records, active orders, and pending balances permanently.</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. Difficulty Tracking Clothes</h3>
+                        <p>When hundreds of garments arrive daily, it is difficult to remember which clothes are being washed, which are pressed, and which are ready for pickup. This causes garment mix-ups and delays.</p>
+                    </div>
+                    <div class="card orange-border">
+                        <h3>3. Calculation Mistakes in Billing</h3>
+                        <p>Calculating bills manually during peak rush hours often leads to arithmetic mistakes. This results in either charging the customer incorrectly or causing financial loss to the shop.</p>
+                    </div>
+                    <div class="card">
+                        <h3>4. Forgetting Payment Statuses</h3>
+                        <p>Shopkeepers frequently forget whether a customer has already paid or still owes money. Without an organized digital record, payment disputes and misunderstandings occur regularly.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: Project Objectives -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <div>
+                    <h2>Project Objectives – Goals of Our Application</h2>
+                    <p>What We Aim to Achieve with This Core Java Project</p>
+                </div>
+                <div class="slide-num-box">04</div>
+            </div>
+            <div class="slide-body">
+                <p class="intro-lead">The primary objective of this project is to build an easy-to-use, reliable, and automated order tracking system using Core Java. Our project focuses on the following key goals:</p>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>01. Customer Records</h3>
+                        <p>To record and organize customer details such as name and phone number systematically without using paper notebooks.</p>
+                    </div>
+                    <div class="card">
+                        <h3>02. Automatic Order IDs</h3>
+                        <p>To generate a unique four-digit order ID automatically for every new order placed in the system starting from 1001.</p>
+                    </div>
+                    <div class="card">
+                        <h3>03. Error-Free Billing</h3>
+                        <p>To calculate bills automatically based on fixed per-garment service rates without any human calculation errors.</p>
+                    </div>
+                    <div class="card">
+                        <h3>04. Live Order Tracking</h3>
+                        <p>To track clothes step-by-step through four distinct stages: Received, Washing, Ready, and Delivered.</p>
+                    </div>
+                    <div class="card">
+                        <h3>05. Payment Tracking</h3>
+                        <p>To maintain clear records of Paid and Pending payments and display real-time business revenue summaries.</p>
+                    </div>
+                    <div class="card">
+                        <h3>06. Permanent Storage</h3>
+                        <p>To save all records permanently in a text file so customer order history is never lost when the program closes.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Proposed Solution -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <div>
+                    <h2>Proposed Solution – How Our Application Works</h2>
+                    <p>A Structured and Automated 6-Step Workflow for Laundry Shops</p>
+                </div>
+                <div class="slide-num-box">05</div>
+            </div>
+            <div class="slide-body">
+                <p class="intro-lead">Our Java application replaces traditional paper registers with an interactive, menu-driven console program. The entire customer journey is handled through six simple automated steps:</p>
+                <div class="grid-3">
+                    <div class="card accent-border">
+                        <h3>Step 1: Customer Intake</h3>
+                        <p>The shopkeeper enters the customer's name and mobile number. Input validation ensures numbers are entered properly.</p>
+                    </div>
+                    <div class="card accent-border">
+                        <h3>Step 2: Service Selection</h3>
+                        <p>The shopkeeper enters garment details (e.g. 3 shirts) and selects Washing, Dry Cleaning, or Ironing from the menu.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Step 3: Auto Billing</h3>
+                        <p>The system multiplies garment quantity by the service rate to display the exact bill amount instantly.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Step 4: Unique ID & Alert</h3>
+                        <p>A unique order ID is assigned and a background thread prints a confirmation notification to the terminal.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Step 5: Status Updates</h3>
+                        <p>As clothes progress through washing and pressing, the shopkeeper updates the status from Received to Delivered.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Step 6: Payment & Storage</h3>
+                        <p>Payment is marked as Paid when settled, and all order data is written to permanent disk storage.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: Technologies Used -->
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <div>
+                    <h2>Technologies & Tools Used in the Project</h2>
+                    <p>Core Software Components and Libraries Explained in Simple Words</p>
+                </div>
+                <div class="slide-num-box">06</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Java Programming Language</h3>
+                        <p>We used Java because it is platform-independent ("Write Once, Run Anywhere"), highly reliable, and strictly follows Object-Oriented Programming (OOP) concepts, making it ideal for academic projects.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Java Development Kit (JDK 8+)</h3>
+                        <p>The JDK provides the Java compiler (javac) to convert our source code into bytecode, and the Java Virtual Machine (JVM) to execute the compiled program on any computer operating system.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Modern Code Editor (VS Code / IDE)</h3>
+                        <p>Visual Studio Code and terminal command tools were used for writing clean code, running builds, testing menu options, and maintaining git version control.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Java Collections Framework</h3>
+                        <p>We utilized ArrayList to store multiple order objects sequentially, HashMap to search orders instantly by their ID, and TreeSet to maintain a sorted catalog of available laundry services.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Java File Handling (I/O Streams)</h3>
+                        <p>We used character streams (BufferedReader and PrintWriter) to read and write text data permanently to orders.txt, and byte streams (FileInputStream and FileOutputStream) for file backups.</p>
+                    </div>
+                    <div class="card">
+                        <h3>JDBC (Database Extension Preview)</h3>
+                        <p>Our code includes a pre-configured Java Database Connectivity method with SQL PreparedStatement, ready to link with relational databases like MySQL in future versions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Main Features -->
+        <div class="slide" id="slide-7">
+            <div class="slide-header">
+                <div>
+                    <h2>Main Features of the System</h2>
+                    <p>Comprehensive Capabilities Designed for Daily Laundry Operations</p>
+                </div>
+                <div class="slide-num-box">07</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>1. Customer Management</h3>
+                        <p>Records customer full name and 10-digit contact number accurately for future communication.</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. Garment Details Entry</h3>
+                        <p>Captures specific garment descriptions (e.g., shirts, suits, curtains) and exact piece counts.</p>
+                    </div>
+                    <div class="card">
+                        <h3>3. Service Catalog & Pricing</h3>
+                        <p>Offers preset rates for Washing (Rs. 50), Dry Cleaning (Rs. 100), and Ironing (Rs. 30).</p>
+                    </div>
+                    <div class="card">
+                        <h3>4. Automatic Order ID Generation</h3>
+                        <p>Assigns a unique sequential four-digit identifier (1001, 1002, 1003...) to each new order.</p>
+                    </div>
+                    <div class="card">
+                        <h3>5. Automated Bill Calculation</h3>
+                        <p>Instantly computes the final cost by multiplying garment quantity with the selected service rate.</p>
+                    </div>
+                    <div class="card">
+                        <h3>6. Pickup & Delivery Selection</h3>
+                        <p>Categorizes whether the customer will collect clothes from the shop or requires doorstep delivery.</p>
+                    </div>
+                    <div class="card">
+                        <h3>7. 4-Stage Status Tracking</h3>
+                        <p>Tracks order lifecycle stages in real-time: Received ➔ Washing ➔ Ready ➔ Delivered.</p>
+                    </div>
+                    <div class="card">
+                        <h3>8. Payment Settlement</h3>
+                        <p>Records payment status as Paid and tracks pending customer balances to prevent revenue loss.</p>
+                    </div>
+                    <div class="card">
+                        <h3>9. Instant Order Search</h3>
+                        <p>Locates and displays full order details in less than a second using HashMap and Order ID.</p>
+                    </div>
+                    <div class="card">
+                        <h3>10. Automated File Backup</h3>
+                        <p>Creates a duplicate binary backup file (orders_backup.txt) to prevent data corruption or loss.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: System Architecture -->
+        <div class="slide" id="slide-8">
+            <div class="slide-header">
+                <div>
+                    <h2>System Architecture & Data Flow</h2>
+                    <p>Block Diagram Demonstrating How Information Flows in the System</p>
+                </div>
+                <div class="slide-num-box">08</div>
+            </div>
+            <div class="slide-body">
+                <div class="flow-container">
+                    <div class="flow-node">User / Shopkeeper<span>Console Input</span></div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">Main Menu<span>Options 1 to 8</span></div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">Customer Module<span>Name & Phone</span></div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">Order & Pricing<span>Rate Computation</span></div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">Tracking & Payment<span>Status Lifecycle</span></div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">File Storage<span>orders.txt & Backup</span></div>
+                </div>
+                <div class="card accent-border" style="flex: 1;">
+                    <h3>Explanation of System Architecture Blocks:</h3>
+                    <ul>
+                        <li><strong>User Interface:</strong> The shopkeeper interacts with the system using numbers (1 to 8) displayed on the terminal menu.</li>
+                        <li><strong>Input Handling & Validation:</strong> The Scanner reads user choices, and wrapper classes ensure incorrect characters do not crash the program.</li>
+                        <li><strong>Business Logic Layer:</strong> Customer objects and Order objects are instantiated using OOP principles and service polymorphism.</li>
+                        <li><strong>In-Memory Collections:</strong> Active orders are held in an ArrayList for listing and a HashMap for rapid O(1) key-based ID lookups.</li>
+                        <li><strong>Permanent Persistence Layer:</strong> The system writes pipe-delimited records to orders.txt and creates a binary copy in orders_backup.txt.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Module Division Among Four Members -->
+        <div class="slide" id="slide-9">
+            <div class="slide-header">
+                <div>
+                    <h2>Module Division Among Four Team Members</h2>
+                    <p>Clear Division of Academic Responsibilities Across the Project Team</p>
+                </div>
+                <div class="slide-num-box">09</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Member 1: Tanmay Arora</h3>
+                        <p style="color: var(--accent); font-weight: 700;">Module 1: Customer & Service Management</p>
+                        <ul>
+                            <li>Designed the Customer class to store customer names and phone numbers.</li>
+                            <li>Created the abstract parent class LaundryService.</li>
+                            <li>Implemented child classes: WashingService, DryCleaningService, and IroningService.</li>
+                            <li>Defined fixed per-garment service rates and customer input validation.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Member 2: [Team Member 2]</h3>
+                        <p style="color: var(--accent); font-weight: 700;">Module 2: Order Creation & Pricing Logic</p>
+                        <ul>
+                            <li>Developed the core Order class to link customer, garment, and service details.</li>
+                            <li>Implemented automatic unique Order ID generation starting from 1001.</li>
+                            <li>Created the automated bill calculation logic (Quantity × Service Rate).</li>
+                            <li>Handled pickup and delivery option selection and order display formatting.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Member 3: [Team Member 3]</h3>
+                        <p style="color: var(--accent); font-weight: 700;">Module 3: Order Tracking & Payment</p>
+                        <ul>
+                            <li>Created the Trackable interface to define status update capabilities.</li>
+                            <li>Implemented the 4-stage lifecycle: Received ➔ Washing ➔ Ready ➔ Delivered.</li>
+                            <li>Built the fast order search feature using HashMap for instant lookup by ID.</li>
+                            <li>Created the payment recording module to toggle status from Pending to Paid.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Member 4: [Team Member 4]</h3>
+                        <p style="color: var(--accent); font-weight: 700;">Module 4: File Handling, Reports & Integration</p>
+                        <ul>
+                            <li>Created saveOrders() and loadOrders() methods using BufferedReader/PrintWriter.</li>
+                            <li>Developed the byte-stream backup method to create orders_backup.txt.</li>
+                            <li>Implemented the Business Summary module using modern Java Streams.</li>
+                            <li>Integrated all four modules into the main switch-case loop.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Module 1 – Customer & Service Management -->
+        <div class="slide" id="slide-10">
+            <div class="slide-header">
+                <div>
+                    <h2>Module 1 – Customer and Service Management</h2>
+                    <p>Collecting Customer Details and Organizing Laundry Service Catalogs</p>
+                </div>
+                <div class="slide-num-box">10</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Customer Information Management</h3>
+                        <ul>
+                            <li><strong>Customer Representation:</strong> Every customer is represented by an independent Customer object containing their full name and contact phone number.</li>
+                            <li><strong>Data Protection (Encapsulation):</strong> Customer variables are declared private. They cannot be modified directly from outside the class, keeping the data secure and preventing accidental changes.</li>
+                            <li><strong>Input Validation:</strong> The system ensures the user provides valid text and numbers so that incomplete records are never saved into application memory.</li>
+                        </ul>
+                    </div>
+                    <div class="card accent-border">
+                        <h3>Laundry Services & Fixed Pricing</h3>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="background: var(--ice-blue); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+                                <strong style="color: var(--navy);">1. Washing Service:</strong> <span style="color: var(--green); font-weight: bold;">Rs. 50.00 / garment</span>
+                                <p style="font-size: 11px; margin-top: 2px;">Standard water and detergent wash for daily casual clothes like shirts, t-shirts, and trousers.</p>
+                            </div>
+                            <div style="background: var(--ice-blue); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+                                <strong style="color: var(--navy);">2. Dry Cleaning Service:</strong> <span style="color: var(--green); font-weight: bold;">Rs. 100.00 / garment</span>
+                                <p style="font-size: 11px; margin-top: 2px;">Specialized chemical solvent cleaning for delicate garments like suits, blazers, and woolens.</p>
+                            </div>
+                            <div style="background: var(--ice-blue); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+                                <strong style="color: var(--navy);">3. Ironing Service:</strong> <span style="color: var(--green); font-weight: bold;">Rs. 30.00 / garment</span>
+                                <p style="font-size: 11px; margin-top: 2px;">Steam press and wrinkle removal service for freshly washed garments.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: Module 2 – Order Management and Pricing -->
+        <div class="slide" id="slide-11">
+            <div class="slide-header">
+                <div>
+                    <h2>Module 2 – Order Management and Pricing</h2>
+                    <p>Automated Order Creation and Dynamic Price Calculation</p>
+                </div>
+                <div class="slide-num-box">11</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>How an Order is Created Step-by-Step</h3>
+                        <ul>
+                            <li><strong>1. Customer Identification:</strong> The shopkeeper enters the customer's name and phone number. An existing or new customer record is linked.</li>
+                            <li><strong>2. Garment Details Entry:</strong> The user enters the description of garments (for example, "3 Shirts").</li>
+                            <li><strong>3. Service Selection:</strong> The user chooses from the menu: 1 for Washing, 2 for Dry Cleaning, or 3 for Ironing.</li>
+                            <li><strong>4. Automatic Order ID Generation:</strong> The system assigns the next sequential four-digit order ID (starts at 1001, then 1002, 1003...). This ensures every order is unique.</li>
+                        </ul>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Real-Life Calculation Example</h3>
+                        <ul>
+                            <li><strong>Customer Name:</strong> Aman Sharma</li>
+                            <li><strong>Garment Type:</strong> Shirts</li>
+                            <li><strong>Service Chosen:</strong> Washing</li>
+                            <li><strong>Quantity:</strong> 3 garments</li>
+                            <li><strong>Service Rate:</strong> Rs. 50.00 per garment</li>
+                        </ul>
+                        <div style="background: #EFF6FF; border: 1px solid #93C5FD; padding: 10px 14px; border-radius: 6px; margin-top: 8px;">
+                            <strong style="color: var(--royal); font-size: 11px;">BILL CALCULATION FORMULA:</strong>
+                            <div style="font-size: 13px; font-weight: bold; color: var(--green); margin: 4px 0;">Total Bill = 3 × Rs. 50.00 = Rs. 150.00</div>
+                            <span style="font-size: 11px; color: var(--text-muted);">Status: "Received" | Payment: "Pending"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: Module 3 – Order Tracking and Payment -->
+        <div class="slide" id="slide-12">
+            <div class="slide-header">
+                <div>
+                    <h2>Module 3 – Order Tracking and Payment</h2>
+                    <p>Lifecycle Progress Tracking and Financial Settlement</p>
+                </div>
+                <div class="slide-num-box">12</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-4" style="flex: 0.8;">
+                    <div class="card">
+                        <h3>1. Received</h3>
+                        <p>Clothes are accepted at the shop counter and order details are registered.</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. Washing</h3>
+                        <p>Clothes are actively being washed, dry cleaned, or steam ironed.</p>
+                    </div>
+                    <div class="card">
+                        <h3>3. Ready</h3>
+                        <p>Cleaning is finished. Clothes are packed and ready for pickup.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>4. Delivered</h3>
+                        <p>Garments are handed back to the customer, completing the cycle.</p>
+                    </div>
+                </div>
+                <div class="grid-2" style="flex: 1.2;">
+                    <div class="card">
+                        <h3>Instant Order Search by ID</h3>
+                        <ul>
+                            <li>When a customer visits or calls the shop, they provide their unique Order ID.</li>
+                            <li>The shopkeeper enters the number (e.g. 1001) into menu option 3.</li>
+                            <li>Using HashMap, the system locates and displays the order details in less than a second.</li>
+                            <li>If the ID does not exist, a custom InvalidOrderException displays an informative error.</li>
+                        </ul>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Payment Status Management</h3>
+                        <ul>
+                            <li>Every new order begins with payment marked as "Pending".</li>
+                            <li>When the customer clears the bill, the shopkeeper selects menu option 5.</li>
+                            <li>The payment status updates from "Pending" to "Paid".</li>
+                            <li>The system prevents duplicate payments by checking if an order is already paid, keeping accounts clear.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: Module 4 – File Handling and Reports -->
+        <div class="slide" id="slide-13">
+            <div class="slide-header">
+                <div>
+                    <h2>Module 4 – File Handling, Backup and Reports</h2>
+                    <p>Permanent Data Storage and Real-Time Business Summaries</p>
+                </div>
+                <div class="slide-num-box">13</div>
+            </div>
+            <div class="slide-body">
+                <div class="card">
+                    <h3>1. Permanent File Storage (orders.txt)</h3>
+                    <p>Whenever the user selects option 7 or 8, the saveOrders() method writes all orders into orders.txt using pipe-delimited records. When the application starts up, loadOrders() automatically reads previous records so history is never lost.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Automated Dual Backup (orders_backup.txt)</h3>
+                    <p>The createBackup() method uses Java low-level byte streams (FileInputStream and FileOutputStream) to make an exact byte-for-byte copy of orders.txt. This protects shop records against accidental file loss or corruption.</p>
+                </div>
+                <div class="card green-border">
+                    <h3>3. Business Summary & Analytics</h3>
+                    <p>Option 6 provides instant financial and order analytics calculated with modern Java Streams:</p>
+                    <ul>
+                        <li><strong>Total Orders Processed:</strong> Complete count of all registered orders.</li>
+                        <li><strong>Paid Orders Count:</strong> Total number of settled accounts.</li>
+                        <li><strong>Revenue Collected:</strong> Exact sum of all paid orders in Rupees.</li>
+                        <li><strong>Highest-Value Order:</strong> Automatically identifies and highlights the biggest customer order.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: Object-Oriented Programming (OOP) Concepts -->
+        <div class="slide" id="slide-14">
+            <div class="slide-header">
+                <div>
+                    <h2>Object-Oriented Programming (OOP) Concepts</h2>
+                    <p>Core OOP Principles Explained with Everyday Examples and Project Code</p>
+                </div>
+                <div class="slide-num-box">14</div>
+            </div>
+            <div class="slide-body">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>OOP Principle</th>
+                            <th>Real-Life Everyday Analogy</th>
+                            <th>Implementation in Our Laundry Project</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="concept-name">Class</td>
+                            <td>Like an architectural blueprint used to build houses.</td>
+                            <td><code>Customer</code> and <code>Order</code> classes define templates for records.</td>
+                        </tr>
+                        <tr>
+                            <td class="concept-name">Object</td>
+                            <td>An actual physical house constructed from a blueprint.</td>
+                            <td><code>new Customer("Aman", "9876543210")</code> creates a real customer.</td>
+                        </tr>
+                        <tr>
+                            <td class="concept-name">Encapsulation</td>
+                            <td>A medicine capsule or ATM protecting cash inside.</td>
+                            <td>Private fields (amount, status) accessed via getter/setter methods.</td>
+                        </tr>
+                        <tr>
+                            <td class="concept-name">Inheritance</td>
+                            <td>A child inheriting family traits from their parents.</td>
+                            <td><code>WashingService</code> and <code>DryCleaningService</code> extend <code>LaundryService</code>.</td>
+                        </tr>
+                        <tr>
+                            <td class="concept-name">Polymorphism</td>
+                            <td>One person acting as a customer, driver, and student.</td>
+                            <td><code>selectedService.getRate()</code> calls the specific rate at runtime.</td>
+                        </tr>
+                        <tr>
+                            <td class="concept-name">Abstraction</td>
+                            <td>Pressing a car accelerator without knowing engine combustion.</td>
+                            <td><code>abstract class LaundryService</code> specifies <code>getRate()</code> without body.</td>
+                        </tr>
+                        <tr>
+                            <td class="concept-name">Interface</td>
+                            <td>A standard wall socket where any matching plug works.</td>
+                            <td><code>interface Trackable</code> specifies <code>updateStatus()</code> implemented by Order.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: Other Core Java Concepts Used -->
+        <div class="slide" id="slide-15">
+            <div class="slide-header">
+                <div>
+                    <h2>Other Core Java Concepts Used in the Project</h2>
+                    <p>Modern Java Libraries and Techniques Explained in Simple Language</p>
+                </div>
+                <div class="slide-num-box">15</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>ArrayList & HashMap (Collections)</h3>
+                        <p><strong>ArrayList:</strong> Stores all order records sequentially in a dynamic resizable array.<br>
+                        <strong>HashMap:</strong> Provides key-value lookup to search any order by its ID in O(1) instant time.</p>
+                    </div>
+                    <div class="card">
+                        <h3>TreeSet (Collections)</h3>
+                        <p>Maintains an automatically sorted catalog of unique laundry service names ("Dry Cleaning", "Ironing", "Washing").</p>
+                    </div>
+                    <div class="card">
+                        <h3>Custom Exception Handling</h3>
+                        <p><code>InvalidOrderException</code> and <code>try-catch</code> blocks prevent system crashes when invalid numbers or missing IDs are entered.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Generics (&lt;T&gt;)</h3>
+                        <p>A reusable generic display method <code>displayList(List&lt;T&gt; list)</code> displays lists of any data type cleanly without duplicate code.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Java Streams & Lambdas</h3>
+                        <p>Concise functional operations to filter paid orders, sum up total shop revenue, and sort orders by highest value.</p>
+                    </div>
+                    <div class="card accent-border">
+                        <h3>Multithreading & Byte Streams</h3>
+                        <p>A background <code>Thread</code> prints instant order alerts without blocking the console. Byte streams create automated backup copies.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: Program Execution / Terminal Output -->
+        <div class="slide" id="slide-16">
+            <div class="slide-header">
+                <div>
+                    <h2>Program Execution & Sample Terminal Output</h2>
+                    <p>Demonstration of the Console Interface During an Actual Order Placement</p>
+                </div>
+                <div class="slide-num-box">16</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="terminal-box">========================================
+   LAUNDRY / DRY CLEANING ORDER SYSTEM
+========================================
+--------------- MAIN MENU ---------------
+1. Create new laundry order
+2. View all orders
+3. Search order by ID
+4. Update order status
+5. Record payment
+6. Business summary
+7. Save and create backup
+8. Save and exit
+Enter your choice: 1
+
+--- Create New Order ---
+Customer name: Aman Sharma
+Phone number: 9876543210
+Garment details: 3 Shirts
+Available services:
+1. Washing - Rs. 50.00 per garment
+2. Dry Cleaning - Rs. 100.00 per garment
+3. Ironing - Rs. 30.00 per garment
+Choose service (1-3): 1
+Number of garments: 3
+Pickup or Delivery: Pickup
+
+Order created successfully!
+----------------------------------------
+Order ID       : 1001
+Customer       : Aman Sharma
+Phone          : 9876543210
+Garment        : 3 Shirts
+Service        : Washing
+Quantity       : 3
+Pickup/Delivery: Pickup
+Order Status   : Received
+Total Amount   : Rs. 150.00
+Payment        : Pending
+----------------------------------------
+[Notification] Order 1001 received for Aman Sharma.</div>
+                    <div class="card">
+                        <h3>Execution Walkthrough</h3>
+                        <ul>
+                            <li><strong>1. Launching the System:</strong> The program loads existing records from orders.txt and displays the 8-option menu.</li>
+                            <li><strong>2. Selecting Option 1:</strong> The user chooses option 1 to create a new order.</li>
+                            <li><strong>3. Entering Information:</strong> Name, phone number, garments, service type, and quantity are entered.</li>
+                            <li><strong>4. Instant Bill Calculation:</strong> The system multiplies 3 shirts by Rs. 50 to display Rs. 150.00.</li>
+                            <li><strong>5. ID Generation:</strong> Assigns Order ID 1001 with default status "Received".</li>
+                            <li><strong>6. Multithreading Notification:</strong> A background thread alerts that the order has been received.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: Advantages of the Project -->
+        <div class="slide" id="slide-17">
+            <div class="slide-header">
+                <div>
+                    <h2>Advantages of the Laundry Management System</h2>
+                    <p>Key Benefits and Practical Value Delivered to Small Business Owners</p>
+                </div>
+                <div class="slide-num-box">17</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card green-border">
+                        <h3>Simple and User-Friendly</h3>
+                        <p>The console menu uses simple numbers (1 to 8). Any laundry assistant can learn to operate the entire system within five minutes without requiring specialized computer training.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Eliminates Calculation Mistakes</h3>
+                        <p>By automating price calculation (Quantity × Rate), the system completely eliminates manual math errors that often occur when calculating bills in a rush.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Complete Status Transparency</h3>
+                        <p>Clothes are clearly tracked across four distinct stages (Received, Washing, Ready, Delivered), preventing misplaced garments and customer complaints.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Organized Customer Records</h3>
+                        <p>Stores complete customer names, contact numbers, and past transaction records in one organized digital location rather than messy paper registers.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Financial Clarity & Revenue Tracking</h3>
+                        <p>Provides clear visibility into paid versus pending balances and computes overall shop revenue with a single menu choice.</p>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Safe and Persistent Data Storage</h3>
+                        <p>Data is automatically saved to permanent disk storage, and byte-stream backups guarantee that order history is never lost even during power failures.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 18: Limitations and Future Scope -->
+        <div class="slide" id="slide-18">
+            <div class="slide-header">
+                <div>
+                    <h2>Current Limitations & Future Scope</h2>
+                    <p>Areas for Future Expansion and Technological Evolution</p>
+                </div>
+                <div class="slide-num-box">18</div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card orange-border">
+                        <h3>Current Limitations (Version 1.0)</h3>
+                        <ul>
+                            <li><strong>Console-Based Interface:</strong> The system runs inside a terminal window without graphical buttons, windows, or mouse support.</li>
+                            <li><strong>Text File Storage:</strong> Data is stored in text files rather than a multi-user relational database server like MySQL.</li>
+                            <li><strong>Manual Cash Payments:</strong> Payments must be manually marked as Paid; there is no built-in online payment gateway.</li>
+                            <li><strong>Single Machine Execution:</strong> The application runs on one local computer and cannot be accessed remotely by customers.</li>
+                        </ul>
+                    </div>
+                    <div class="card green-border">
+                        <h3>Future Scope (Version 2.0 Roadmap)</h3>
+                        <ul>
+                            <li><strong>Graphical User Interface (GUI):</strong> Building an interactive desktop application using JavaFX or Java Swing with buttons and dashboards.</li>
+                            <li><strong>MySQL Database Integration:</strong> Connecting the existing JDBC prepared-statement layer to a relational MySQL database server.</li>
+                            <li><strong>Online Payment Integration:</strong> Adding UPI QR codes, Razorpay, and digital receipts for instant contactless payments.</li>
+                            <li><strong>SMS & WhatsApp Notifications:</strong> Sending automated alerts to customer phones when garments reach the "Ready" stage.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 19: Conclusion & Learning Outcomes -->
+        <div class="slide" id="slide-19">
+            <div class="slide-header">
+                <div>
+                    <h2>Conclusion & Academic Learning Outcomes</h2>
+                    <p>Key Takeaways from Designing and Implementing the Java System</p>
+                </div>
+                <div class="slide-num-box">19</div>
+            </div>
+            <div class="slide-body">
+                <div class="card accent-border">
+                    <h3>Project Summary</h3>
+                    <p>The Laundrymat / Dry Cleaning Order Tracking System successfully demonstrates how Core Java can solve real-world operational challenges. By replacing messy manual paper records with a structured, automated console program, our application ensures fast order creation, error-free price calculations, transparent status tracking, and secure permanent data storage for laundry businesses.</p>
+                </div>
+                <div class="card">
+                    <h3>What Our Team Learned During Project Development:</h3>
+                    <ul>
+                        <li><strong>Practical OOP Application:</strong> Gained deep hands-on understanding of Encapsulation, Inheritance, Polymorphism, Abstraction, and Interfaces.</li>
+                        <li><strong>Collections Selection:</strong> Learned how to choose the right data structure (ArrayList for ordered lists vs HashMap for fast key lookups).</li>
+                        <li><strong>File Persistence & Stream Backup:</strong> Understood how character streams preserve records and byte streams create exact duplicate backups.</li>
+                        <li><strong>Collaborative Software Development:</strong> Practiced dividing complex software into 4 clear student modules and integrating them into one system.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>B.Tech CSE (AI & ML) | 3rd Semester | Chitkara University</span>
+                <span class="right-tag">Laundry Management System</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 20: Thank You Slide -->
+        <div class="slide slide-title-bg" id="slide-20">
+            <h1 style="font-size: 42px; font-weight: 800; margin-bottom: 8px;">THANK YOU!</h1>
+            <p style="font-size: 18px; color: #93C5FD; margin-bottom: 24px;">Any Questions or Feedback?</p>
+            
+            <div class="team-box" style="max-width: 650px; text-align: center; margin: 0 auto;">
+                <p style="font-size: 13px; color: #38BDF8; font-weight: bold; margin-bottom: 6px;">PROJECT: LAUNDRYMAT / DRY CLEANING ORDER TRACKING SYSTEM</p>
+                <p style="font-size: 12px; margin-bottom: 12px;">Presented by: Tanmay Arora & Project Team</p>
+                <p style="font-size: 11px; color: #94A3B8;">Department of Computer Science & Engineering (AI & ML)<br>Chitkara University, Punjab</p>
+            </div>
+        </div>
+
+        <!-- Presenter Notes Drawer -->
+        <div class="notes-drawer" id="notesDrawer">
+            <h4>🎙️ Student Presentation Script / Notes (What to Speak)</h4>
+            <p id="notesContent">Loading notes...</p>
+        </div>
+
+    </div>
+
+    <!-- Bottom Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+
+    <script>
+        const totalSlides = 20;
+        let currentSlide = 1;
+
+        const speakerNotes = {
+            1: "Good morning respected teachers and fellow students. Today, our team is presenting our 3rd-semester B.Tech Computer Science project titled 'Laundrymat / Dry Cleaning Order Tracking System Using Java'. Our team members are Tanmay Arora and our project partners. In this presentation, we will explain the problems faced by traditional laundry shops, how our Java application solves them, the object-oriented concepts used, and a live demonstration of the system.",
+            2: "To begin with, let us understand what a laundry management system is. In our daily lives, almost everyone uses laundry or dry cleaning services. Traditionally, shopkeepers write customer details in paper notebooks. Our project replaces those notebooks with a simple, automated computer program written in Java that manages customer information, services, bills, and deliveries smoothly.",
+            3: "Now let us look at the problem statement. Why do traditional laundry shops face difficulties? First, paper notebooks can get wet, torn, or lost. Second, when hundreds of garments arrive, it is very hard to remember which clothes are being washed and which are ready. Third, manual bill calculations often lead to mistakes. Fourth, shopkeepers frequently forget whether a customer has paid or not. Our software solves all these real-world challenges.",
+            4: "Our project objectives are very clear: first, to manage customer names and numbers digitally; second, to generate unique order IDs automatically; third, to calculate bills without errors; fourth, to track clothes across cleaning stages; fifth, to keep track of payments and revenue; and sixth, to save all data permanently in files.",
+            5: "Here is our proposed solution. Our program follows a clean 6-step process: entering customer details, selecting the service, calculating the bill automatically, generating a unique order ID, tracking the order status from Received to Delivered, and finally recording payment and saving the data.",
+            6: "Moving to technologies used: we used Core Java because it is platform-independent and object-oriented; the JDK to compile and run our code; VS Code as our development environment; Java Collections like ArrayList and HashMap for in-memory data management; and Java File Handling to save records permanently in text files.",
+            7: "Our system includes 10 major features: customer contact storage, garment details entry, service rate catalog, automatic four-digit order IDs, instant bill calculation, pickup and delivery tagging, live 4-stage tracking, payment recording, instant ID searching, and automated file backups.",
+            8: "This slide shows our system architecture. The shopkeeper enters numbers on the console menu. The input is validated, processed by our core business classes, stored in fast memory using Java Collections, and immediately saved into permanent text files on the disk.",
+            9: "We divided the project equally among four team members. Member 1 handled Customer and Service management. Member 2 developed Order creation and pricing logic. Member 3 implemented Order tracking and payment recording. Member 4 implemented file handling, automated backups, and business reports.",
+            10: "In Module 1, we store customer names and phone numbers using private variables for data protection. We also defined three services: Washing at Rs. 50 per garment, Dry Cleaning at Rs. 100 per garment, and Ironing at Rs. 30 per garment.",
+            11: "In Module 2, when an order is created, the system multiplies garment quantity by the service rate. For example, if Aman brings 3 shirts for washing at Rs. 50, the bill is automatically calculated as 3 times 50, which is Rs. 150. A unique order ID starting from 1001 is assigned.",
+            12: "In Module 3, orders move through four clear stages: Received, Washing, Ready, and Delivered. Using a HashMap, the shopkeeper can find any customer's order instantly by entering their Order ID. Payments can also be marked as Paid with a single button press.",
+            13: "In Module 4, order data is saved permanently in orders.txt. We also built an automatic backup method that creates an exact copy called orders_backup.txt using byte streams. Our business summary calculates total revenue and identifies the highest-value order.",
+            14: "Now, let us explain how we applied Object-Oriented Programming: A Class is a blueprint, like our Customer class. An Object is a real instance created from that blueprint. Encapsulation protects data using private variables. Inheritance lets WashingService inherit from LaundryService. Polymorphism calculates rates dynamically. Abstraction hides complexity, and Interfaces define standard contracts like Trackable.",
+            15: "Beyond basic OOP, we used ArrayList for dynamic lists, HashMap for instant O(1) searches, custom exceptions to handle invalid inputs gracefully, Java Streams to calculate business totals, and Multithreading to print background notifications without freezing the program.",
+            16: "This slide shows our actual program output. When option 1 is selected, the user enters customer details and selects washing for 3 shirts. The system instantly generates Order ID 1001, calculates Rs. 150.00, sets status to Received, and prints a background notification.",
+            17: "The main advantages of our project are that it is easy to use, eliminates calculation mistakes, provides complete status transparency, maintains organized records, and ensures safe data storage through automated backups.",
+            18: "Looking at limitations and future scope: currently, our system is console-based and uses text files. In future versions, we plan to add a graphical user interface with JavaFX, connect to a MySQL database using our JDBC methods, and integrate online UPI payments and WhatsApp alerts.",
+            19: "In conclusion, our project successfully solves daily laundry management challenges using Core Java. Developing this system gave us hands-on experience in object-oriented programming, data structures, file persistence, and team collaboration.",
+            20: "Thank you so much for your time and attention. We now welcome any questions or feedback from the evaluators."
+        };
+
+        function showSlide(slideIndex) {
+            if (slideIndex < 1 || slideIndex > totalSlides) return;
+            currentSlide = slideIndex;
+
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+
+            document.getElementById('slideIndicator').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+            document.getElementById('progressBar').style.width = `${(currentSlide / totalSlides) * 100}%`;
+
+            document.getElementById('notesContent').innerText = speakerNotes[currentSlide] || "No notes available for this slide.";
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        function toggleNotes() {
+            const drawer = document.getElementById('notesDrawer');
+            const btn = document.getElementById('notesToggle');
+            drawer.classList.toggle('open');
+            btn.classList.toggle('active');
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {});
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            } else if (e.key.toLowerCase() === 'n') {
+                toggleNotes();
+            }
+        });
+
+        // Initialize first slide
+        showSlide(1);
+    </script>
+</body>
+</html>
